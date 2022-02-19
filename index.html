@@ -4,51 +4,54 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.dooksa.com/file/dooksa/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.dooksa.com/file/dooksa/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.dooksa.com/file/dooksa/static/favicon-16x16.png">
+    <link rel="manifest" href="https://cdn.dooksa.com/file/dooksa/static/manifest.json">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.dooksa.com/file/dooksa/css/bootstrap.min.css" rel="stylesheet">
-      <style>
-        .loading {
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          opacity: 0;
-          -webkit-animation: fade 1s;
-          animation: fade 1s ;
-        }
-        .loading:before {
-          display: block;
-          height: 5px;
-          width: 5px;
-          content: '';
-          -webkit-animation: spin 1s infinite;
-                  animation: spin 1s infinite;
-          border-radius: 100%;
-          -webkit-box-shadow: 20px 0 0 5px var(--bs-primary), -20px 0 0 5px var(--bs-primary);
-                  box-shadow: 20px 0 0 5px var(--bs-primary), -20px 0 0 5px var(--bs-primary); }
+    <style>
+      .loading {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        -webkit-animation: fade 1s;
+        animation: fade 1s ;
+      }
+      .loading:before {
+        display: block;
+        height: 5px;
+        width: 5px;
+        content: '';
+        -webkit-animation: spin 1s infinite;
+                animation: spin 1s infinite;
+        border-radius: 100%;
+        -webkit-box-shadow: 20px 0 0 5px var(--bs-primary), -20px 0 0 5px var(--bs-primary);
+                box-shadow: 20px 0 0 5px var(--bs-primary), -20px 0 0 5px var(--bs-primary); }
 
-        @-webkit-keyframes fade {
-          to {
-            opacity: 1; 
-          } 
-        }
+      @-webkit-keyframes fade {
+        to {
+          opacity: 1; 
+        } 
+      }
 
-        @keyframes fade {
-          to {
-            opacity: 1; 
-          } 
-        }
+      @keyframes fade {
+        to {
+          opacity: 1; 
+        } 
+      }
 
-        @-webkit-keyframes spin {
-          to {
-            -webkit-transform: rotate(360deg);
-                    transform: rotate(360deg); } }
+      @-webkit-keyframes spin {
+        to {
+          -webkit-transform: rotate(360deg);
+                  transform: rotate(360deg); } }
 
-        @keyframes spin {
-          to {
-            -webkit-transform: rotate(360deg);
-                    transform: rotate(360deg); } }
+      @keyframes spin {
+        to {
+          -webkit-transform: rotate(360deg);
+                  transform: rotate(360deg); } }
     </style>
     <title>Hello, world!</title>
   </head>
