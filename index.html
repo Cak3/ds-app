@@ -1,18 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://cdn.dooksa.com/" crossorigin>
+    <link rel="preconnect" href="https://cdn.dooksa.com/">
     <link rel="dns-prefetch" href="https://cdn.dooksa.com/" >
-
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/manifest.json">
-    <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.dooksa.com/file/dooksa/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.dooksa.com/file/dooksa/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.dooksa.com/file/dooksa/static/favicon-16x16.png">
+    <link rel="manifest" href="https://cdn.dooksa.com/file/dooksa/static/manifest.json">
     <style>
       .loading {
         height: 100vh;
@@ -23,6 +19,7 @@
         -webkit-animation: fade 1s;
         animation: fade 1s ;
       }
+      
       .loading:before {
         display: block;
         height: 5px;
@@ -49,18 +46,22 @@
       @-webkit-keyframes spin {
         to {
           -webkit-transform: rotate(360deg);
-                  transform: rotate(360deg); } }
+          transform: rotate(360deg); 
+        }
+      }
 
       @keyframes spin {
         to {
           -webkit-transform: rotate(360deg);
-                  transform: rotate(360deg); } }
+          transform: rotate(360deg);
+        } 
+      }
     </style>
     <title>Hello, world!</title>
   </head>
   <body>
     <div id="root" class="loading"></div>
 
-    <script src="js/ds-app.js"></script>
+    <script src="./ds-app.js"></script>
   </body>
 </html>
