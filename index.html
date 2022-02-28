@@ -1,72 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://cdn.dooksa.com/">
-    <link rel="dns-prefetch" href="https://cdn.dooksa.com/">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.dooksa.com/file/dooksa/static/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.dooksa.com/file/dooksa/static/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.dooksa.com/file/dooksa/static/favicon-16x16.png">
-    <link rel="manifest" href="https://cdn.dooksa.com/file/dooksa/static/manifest.json">
-    <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-      }
-      .loading {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        -webkit-animation: fade 1s;
-        animation: fade 1s ;
-      }
-      
-      .loading:before {
-        display: block;
-        height: 5px;
-        width: 5px;
-        content: '';
-        -webkit-animation: spin 1s infinite;
-        animation: spin 1s infinite;
-        border-radius: 100%;
-        -webkit-box-shadow: 20px 0 0 5px rgb(224 224 224), -20px 0 0 5px rgb(224 224 224);
-        box-shadow: 20px 0 0 5px rgb(224 224 224), -20px 0 0 5px rgb(224 224 224); 
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://cdn.dooksa.com/">
+  <link rel="dns-prefetch" href="https://cdn.dooksa.com/" >
+  <style>
+    body {
+      margin: 0;
+    }
 
-      @-webkit-keyframes fade {
-        to {
-          opacity: 1; 
-        } 
-      }
+    .loading {
+      display: none;
+    }
+  </style>
+  
+<body>
+  <div id="app" class="loading"></div>
+  <script>
+    const slugify = {
+      cleanStrings: [
+        ['a', '[ÀÁÂÃÄÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ]'],
+        ['c', '[ÇĆĈČ]'],
+        ['d', '[ÐĎĐÞ]'],
+        ['e', '[ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ]'],
+        ['g', '[ĜĞĢǴ]'],
+        ['h', '[ĤḦ]'],
+        ['i', '[ÌÍÎÏĨĪĮİỈỊ]'],
+        ['j', '[Ĵ]'],
+        ['ij', '[Ĳ]'],
+        ['k', '[Ķ]'],
+        ['l', '[ĹĻĽŁ]'],
+        ['m', '[Ḿ]'],
+        ['n', '[ÑŃŅŇ]'],
+        ['o', '[ÒÓÔÕÖØŌŎŐỌỎỐỒỔỖỘỚỜỞỠỢǪǬƠ]'],
+        ['oe', '[Œ]'],
+        ['p', '[ṕ]'],
+        ['r', '[ŔŖŘ]'],
+        ['s', '[ßŚŜŞŠ]'],
+        ['t', '[ŢŤ]'],
+        ['u', '[ÙÚÛÜŨŪŬŮŰŲỤỦỨỪỬỮỰƯ]'],
+        ['w', '[ẂŴẀẄ]'],
+        ['x', '[ẍ]'],
+        ['y', '[ÝŶŸỲỴỶỸ]'],
+        ['z', '[ŹŻŽ]'],
+        ['-', '[·/_,:;\']']
+      ],
+      cleanPath (value) {
+        let text = value.toString().toLowerCase().trim()
 
-      @keyframes fade {
-        to {
-          opacity: 1; 
-        } 
-      }
+        text = this._replaceString(text)
 
-      @-webkit-keyframes spin {
-        to {
-          -webkit-transform: rotate(360deg);
-          transform: rotate(360deg); 
+        return text.replace(/\s+/g, '-') // Replace spaces with -
+          .replace(/[+]/g, '-') // Replace + with '-'
+          .replace(/[^\w-]+/g, '') // Remove all non-word chars
+          .replace(/--+/g, '-') // Replace multiple - with single -
+      },
+      _replaceString (text) {
+        for (let i = 0; i < this.cleanStrings.length; i++) {
+          const [to, from] = this.cleanStrings[i]
+
+          text = text.replace(new RegExp(from, 'gi'), to)
         }
-      }
 
-      @keyframes spin {
-        to {
-          -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-        } 
+        return text
       }
-    </style>
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <div id="root" class="loading"></div>
+    }
 
-    <script src="./main.js" async></script>
-  </body>
+    function createScript (id, src) {
+      const script = document.createElement('script')
+
+      script.id = id
+      script.type = 'text/javascript'
+      script.src = src
+      script.type = 'module'
+      document.body.appendChild(script)
+
+      return script
+    }
+
+    const t0 = performance.now();
+    const scriptPromises = []
+    const assetsURL = 'https://cdn.dooksa.com/file/dooksa'
+    const pathname = window.location.pathname
+    const cacheFilename = slugify.cleanPath(pathname) + '.js'
+    const appCacheScript = createScript('ds-app-cache', assetsURL + '/app_cache/' + window.location.hostname + '/' + cacheFilename)
+    const mainScript = createScript('ds-app', 'main.js')
+
+    scriptPromises.push(new Promise(resolve => {
+      appCacheScript.addEventListener('load', () => {
+        const t1 = performance.now();
+        console.log(`Call to cache took ${t1 - t0} milliseconds.`);
+        resolve()
+      })
+    }))
+
+    scriptPromises.push(new Promise(resolve => {
+      mainScript.addEventListener('load', (e) => {
+        const t1 = performance.now()
+        console.log(`Call to main took ${t1 - t0} milliseconds.`);
+        resolve()
+      })
+    }))
+
+    Promise.all(scriptPromises)
+      .then(() => {
+        const t1 = performance.now()
+        window.dsApp.init({
+          appCache: window.dsAppCache,
+          assetsURL,
+          appElement: document.getElementById('app')
+        })
+      })
+  </script>
+</body>
 </html>
