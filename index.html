@@ -86,6 +86,12 @@
     const cacheFilename = slugify.cleanPath(pathname) + '.js'
     const appCacheScript = createScript('ds-app-cache', assetsURL + '/app_cache/' + window.location.hostname + '/' + cacheFilename)
     const mainScript = createScript('ds-app', 'main.js')
+    const cssElement = document.createElement('link')
+
+    cssElement.id = 'ds-theme'
+    cssElement.rel = 'stylesheet'
+    cssElement.href = assetsURL +'/assets/'+ window.location.hostname +'/css/theme.min.css'
+    document.head.insertBefore(cssElement, document.head.childNodes[document.head.childNodes.length - 1].nextSibling)
 
     scriptPromises.push(new Promise(resolve => {
       appCacheScript.addEventListener('load', () => {
